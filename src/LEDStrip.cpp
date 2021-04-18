@@ -11,7 +11,7 @@ void LEDStrip::addLight(led_animation * ledAnim){
     this->lights->push_back(ledAnim);
 }
 
-void LEDStrip::update(float delta){
+void LEDStrip::update(long delta){
     for(int ii=0; ii < this->lights->size(); ii++){
         this->lights->at(ii)->update(delta);
     }
@@ -20,5 +20,11 @@ void LEDStrip::update(float delta){
 void LEDStrip::display(){
     for(int ii=0; ii < this->lights->size(); ii++){
         this->lights->at(ii)->apply();
+    }
+}
+
+void LEDStrip::setBrightness(float b){
+    for(int ii=0; ii < this->lights->size(); ii++){
+        this->lights->at(ii)->setBrightness(b);
     }
 }

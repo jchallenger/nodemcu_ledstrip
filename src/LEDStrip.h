@@ -19,7 +19,7 @@ public:
     void addLight(led_animation * anim);
     void setBrightness(float percent);
     led_animation * getLight(int num = 0){ return this->lights->at(num); }
-    void update(float delta);
+    void update(long delta);
     void display();
 };
 

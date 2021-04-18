@@ -10,13 +10,14 @@ class led_animation
 {
 protected:
     /* data */
-    long startTime = 0;
-    long val = 0;
-    long scale = 1000;
+    unsigned long startTime = 0;
+    long val = 0L;
+    unsigned long scale = 1000;
     PLAYMODE mode = PLAYMODE::PAUSE;
 
     CRGB startColor;
     CRGB targetColor;
+    float brightness = 1.0f;
     CRGB * led;
 
     uint8_t lerp(uint8_t a, uint8_t b, float f){
@@ -26,10 +27,12 @@ public:
     led_animation(CRGB &_led, PLAYMODE mode = PLAYMODE::REPEAT);
     ~led_animation();
 
-    void update(unsigned long delta);
+    void update(long delta);
     void setDuration(unsigned long dur){ this->scale = dur; };
+    void setBrightness(float brightness);
+    CRGB * getTargetColor();
 
-    float getProgress(){ return ((float)this->val / (float)this->scale); }
+    float getProgress(){ return this->val > 0 ? ((float)this->val / (float)this->scale) : 0; }
     long getValue(){ return this->val; }
     void apply();
 };

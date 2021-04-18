@@ -11,7 +11,7 @@ public:
     led_animation_blink(CRGB &_led, PLAYMODE mode = PLAYMODE::PING): led_animation(_led, mode){ }
     ~led_animation_blink(){}
 
-    void apply();
+    void setColorRange(CRGB sC, CRGB tC){ this->startColor = sC; this->targetColor = tC; }
 };
 
 #endif
