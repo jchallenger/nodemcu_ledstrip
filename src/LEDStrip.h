@@ -6,21 +6,21 @@
 
 #include "led_animation.h"
 #include "led_animation_blink.h"
+#include "led_animation_rainbow.h"
 
-class LEDStrip
-{
+class LEDStrip {
 private:
-    std::vector<led_animation*> * lights;
+  std::vector<led_animation *> *lights;
 
 public:
-    LEDStrip();
-    ~LEDStrip(){}
+  LEDStrip();
+  ~LEDStrip() {}
 
-    void addLight(led_animation * anim);
-    void setBrightness(float percent);
-    led_animation * getLight(int num = 0){ return this->lights->at(num); }
-    void update(long delta);
-    void display();
+  void addLight(led_animation *anim);
+  void setBrightness(uint8_t b);
+  led_animation *getLight(int num = 0) { return this->lights->at(num); }
+  void update(long delta);
+  void display();
 };
 
 #endif

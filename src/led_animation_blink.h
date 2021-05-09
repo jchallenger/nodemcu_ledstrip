@@ -3,15 +3,18 @@
 
 class led_animation;
 
-class led_animation_blink : public led_animation
-{
+class led_animation_blink : public led_animation {
 private:
-    /* data */
+  /* data */
 public:
-    led_animation_blink(CRGB &_led, PLAYMODE mode = PLAYMODE::PING): led_animation(_led, mode){ }
-    ~led_animation_blink(){}
+  led_animation_blink(CRGB &_led, PLAYMODE mode = PLAYMODE::PING)
+      : led_animation(_led, mode) {}
+  ~led_animation_blink() {}
 
-    void setColorRange(CRGB sC, CRGB tC){ this->startColor = sC; this->targetColor = tC; }
+  void apply() {
+    this->led->setHSV(this->hue, (this->getProgress() * this->saturation),
+                      (this->getProgress() * this->brightness));
+  }
 };
 
 #endif

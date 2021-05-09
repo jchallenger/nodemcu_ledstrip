@@ -4,8 +4,9 @@ led_animation::led_animation(CRGB &_led, PLAYMODE mode) {
   this->mode = mode;
   this->startTime = millis();
   this->led = &_led;
-  this->startColor = CRGB::Black;
-  this->targetColor = (_led);
+  this->hue = (rgb2hsv_approximate(_led).hue);
+  this->startColor = rgb2hsv_approximate(_led);
+  this->targetColor = rgb2hsv_approximate(_led);
 }
 
 led_animation::~led_animation() {}
@@ -52,15 +53,3 @@ void led_animation::update(long delta) {
     break;
   }
 }
-
-void led_animation::apply() {
-  this->led->setRGB(
-      this->lerp(this->brightness * this->startColor.r,
-                 this->brightness * this->targetColor.r, this->getProgress()),
-      this->lerp(this->brightness * this->startColor.g,
-                 this->brightness * this->targetColor.g, this->getProgress()),
-      this->lerp(this->brightness * this->startColor.b,
-                 this->brightness * this->targetColor.b, this->getProgress()));
-}
-
-void led_animation::setBrightness(float b) { this->brightness = b; }
